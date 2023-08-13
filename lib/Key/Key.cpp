@@ -9,8 +9,8 @@
 #include "KeyPlus.h"
 
 int Key::_keyInterrupt() {
-    static const int STDIN = 0;
-    static bool initialized = false;
+    static const int STDIN { 0 };
+    static bool initialized { false };
 
     if (! initialized) {
         termios term;
@@ -30,7 +30,7 @@ int Key::GetAsyncKey() {
     if (_keyInterrupt()) {
         return GetKey();
     }
-    return 0;
+    return -1;
 }
 
 int Key::GetKey() {
@@ -43,20 +43,22 @@ int Key::GetKey() {
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
     ch = getchar();
     if (ch == 27) {
-        int ch1 = getchar();
-        if (ch1 == 91) {
-            int ch2 = getchar();
-            if (ch2 == 51) {
-                ch = ((ch * 100 + ch1) * 100 + ch2) * 1000 + getchar();
+        std::string ch1t { GetAsyncChar() };
+        if (ch1t != "") {
+            char ch1 { ch1t[0] };
+            
+            if (ch1 == 91) {
+                int ch2 { getchar() };
+                if (ch2 == 51) {
+                    ch = ((ch * 100 + ch1) * 100 + ch2) * 1000 + getchar();
+                } else {
+                    ch = (ch * 100 + ch1) * 100 + ch2;
+                }
             } else {
-                ch = (ch * 100 + ch1) * 100 + ch2;
+                ch = ch * 100 + ch1;
             }
-        } else {
-            ch = ch * 100 + ch1;
         }
-    } else if(ch >= 48 && ch < 58) {
-        ch -= 48;
-    }
+    } 
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     return ch;
 }
@@ -90,13 +92,13 @@ std::string Key::GetAsyncString() {
 }
 
 std::string Key::GetString() {
-    std::string line = "";
+    std::string line { "" };
     while (1) {
-        std::string newChar = GetAsyncChar();
+        std::string newChar { GetAsyncChar() };
         if (newChar == "\n")  {
             break; 
         } else {
-            std::string bs { (char)BACKSPACE };
+            std::string bs { (char)Backspace };
             if (newChar == bs)  {
                 line.pop_back();
             } else {
