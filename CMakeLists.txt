@@ -10,6 +10,10 @@ message(STATUS "Compile with static library? ${USE_STATIC}")
 add_executable(TBFight
     main.cpp
     lib/Key/Key.cpp
+    Controller/Controller.cpp
+    Spell/Spell.cpp
+    Unit/Unit.cpp
+    Squad/Squad.cpp
 ) 
 
 
