@@ -20,6 +20,8 @@ class BattleField
 {
 private:
     vector<string> categories {};
+    vector<string> spells     {};
+    vector<string> inventory  {};
 
     string currentStep     { "ChoosingCategory" };
     string currentCategory { "" };
@@ -36,6 +38,7 @@ private:
     void show            ();
     void showBattleField ();
     void showMenu        ();
+    void showDirectory   (vector<string> *directory, string name);
     void showHeros       ();
     void showEnemies     ();
 
