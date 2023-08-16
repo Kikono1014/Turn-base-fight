@@ -19,12 +19,18 @@ using std::vector;
 class BattleField
 {
 private:
+    vector<string> log {};
+
     vector<string> categories {};
     vector<string> spells     {};
     vector<string> inventory  {};
 
+    vector<string> heros   {};
+    vector<string> enemies {};
+
     string currentStep     { "ChoosingCategory" };
     string currentCategory { "" };
+    int    currentHero     { 0 };
     int    cursor          { 0 };
 
 
@@ -45,9 +51,9 @@ private:
 
     void chooseCategory (Controller ctrl);
 
-    void chooseAction   (Controller ctrl);
+    void chooseAction   (Controller ctrl, vector<string> *category);
 
-    void makeAttack     (Controller ctrl);
+    void makeAttack     (Controller ctrl, string executant, string target);
 
 public:
     BattleField ();

@@ -4,7 +4,10 @@ BattleField::BattleField ()
 {
     categories = { "Attack", "Magic", "Inventory", "Run" };
     spells     = { "Spell1", "Spell2", "Spell3", "Spell4" };
-    inventory  = { "Potion1", "Potion2"};
+    inventory  = { "Potion1", "Potion2" };
+
+    heros   = { "Hero1", "Hero2", "Hero3" };
+    enemies = { "Enemy1", "Enemy2", "Enemy3", "Enemy4" };
 }
 
 
@@ -21,7 +24,15 @@ void BattleField::runBattle (Controller ctrl)
             if        (currentStep == "ChoosingCategory") {
                 chooseCategory(ctrl);
             } else if (currentStep == "ChoosingAction") {
-                chooseAction(ctrl);
+                if (currentCategory == "Attack") {
+                    chooseAction(ctrl, &enemies);
+                }
+                if (currentCategory == "Magic") {
+                    chooseAction(ctrl, &spells);
+                }
+                if (currentCategory == "Inventory") {
+                    chooseAction(ctrl, &inventory);
+                }
             }
         }        
         delay(1/3);
@@ -80,9 +91,14 @@ void BattleField::checkCursorMoving (Controller ctrl, int max)
 
 
 void BattleField::show () {
+    std::cout << currentHero << std::endl;
     std::cout << currentStep << std::endl;
     std::cout << cursor      << std::endl;
-    
+    if (currentStep == "End") {
+        for (string line : log) {
+            std::cout << line << std::endl;
+        }
+    }
     showBattleField ();
     showMenu        ();
     showHeros       ();
@@ -95,6 +111,9 @@ void BattleField::showMenu () {
         showDirectory(&categories, "Categories");
     }
     if (currentStep == "ChoosingAction") {
+        if (currentCategory == "Attack") {
+            showDirectory(&enemies, "Enemies");
+        }
         if (currentCategory == "Magic") {
             showDirectory(&spells, "Spells");
         }
@@ -128,21 +147,14 @@ void BattleField::chooseCategory (Controller ctrl)
     }
 }
 
-void BattleField::chooseAction (Controller ctrl)
+void BattleField::chooseAction (Controller ctrl, vector<string> *category)
 {
-    int size { 0 };
-    if (currentCategory == "Magic") {
-        size = spells.size() - 1;
-    }
-    if (currentCategory == "Inventory") {
-        size = inventory.size() - 1;
-    }
-    checkCursorMoving(ctrl, size);
+    checkCursorMoving(ctrl, category->size() - 1);
+
     if (ctrl.isCurrentAction("Confirm")) {
-        currentCategory = "";
         currentStep     = "Attacking";
         cursor          = 0;
-        makeAttack(ctrl);
+        makeAttack(ctrl, heros[currentHero], (*category)[cursor]);
     }
     if (ctrl.isCurrentAction("Cancel")) {
         currentCategory = "";
@@ -151,9 +163,26 @@ void BattleField::chooseAction (Controller ctrl)
     }
 }
 
-void BattleField::makeAttack (Controller ctrl)
+void BattleField::makeAttack (Controller ctrl, string executant, string target)
 {
-    
+    if (currentCategory == "Attack") {
+        log.push_back(executant + " attack " + target);
+    }
+    if (currentCategory == "Magic") {
+        log.push_back(executant + " use " + target);
+    }
+    if (currentCategory == "Inventory") {
+        log.push_back(executant + " use " + target);
+    }
+    currentCategory = "";
+    currentStep     = "ChoosingCategory";
+    currentHero++;
+            
+    if (currentHero == heros.size()) {
+        currentStep = "End";
+        currentHero = 0;
+    }
+
 }
 
 
