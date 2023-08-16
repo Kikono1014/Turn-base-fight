@@ -13,6 +13,13 @@ private:
 public:
     BattleField ();
     void runBattle (Controller ctrl);
+
+    void chooseCategory (Controller ctrl);
+
+    void chooseAction   (Controller ctrl);
+
+    void makeAttack     (Controller ctrl);
+    
     ~BattleField ();
 
 };

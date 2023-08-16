@@ -12,11 +12,14 @@ using std::map;
 class Controller
 {
 private:
+    int key {};
     map<string, int> controls {};
 public:
     Controller ();
-    int getKey ();
-    int getActionKey (string actionName);
+    void updateKey          ();
+    int  getKey             ();
+    int  getActionKey       (string actionName);
+    bool isCurrentAction (string actionName);
     ~Controller ();
 
 };

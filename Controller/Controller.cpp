@@ -7,15 +7,25 @@ Controller::Controller ()
 }
 
 
+void Controller::updateKey ()
+{
+    key = Key::GetAsyncKey();
+}
+
 int Controller::getKey ()
 {
-    return Key::GetAsyncKey();
+    return key;
 }
 
 
 int Controller::getActionKey (string actionName)
 {
     return controls[actionName];
+}
+
+bool Controller::isCurrentAction (string actionName)
+{
+    return key == controls[actionName];
 }
 
 Controller::~Controller ()
