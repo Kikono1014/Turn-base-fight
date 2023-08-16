@@ -2,8 +2,11 @@
 
 Controller::Controller ()
 {
-    controls["ConfirmAction"] = Enter;
-    controls["CancelAction"]  = Backspace;
+    controls["Confirm"]    = Enter;
+    controls["Cancel"]     = Backspace;
+    controls["Exit"]       = Escape;
+    controls["CursorNext"] = ArrowDown;
+    controls["CursorPrev"] = ArrowUp;
 }
 
 

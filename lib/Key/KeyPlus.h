@@ -3,6 +3,7 @@ enum buttons
     Tab                = 9,
     Enter              = 10,
     Delete             = 22,
+    Escape             = 27,
 
     ExclamationMark    = 33,
     QuotationMark      = 34,

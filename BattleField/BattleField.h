@@ -23,11 +23,15 @@ private:
 
     string currentStep     { "ChoosingCategory" };
     string currentCategory { "" };
-    int    cursor { 0 };
+    int    cursor          { 0 };
 
 
     void delay (double time);
     void clear ();
+
+    void moveCursorNext    (int max);
+    void moveCursorPrev    (int max);
+    void checkCursorMoving (Controller ctrl, int max);
 
     void show            ();
     void showBattleField ();

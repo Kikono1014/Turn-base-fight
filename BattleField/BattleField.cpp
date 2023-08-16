@@ -12,7 +12,7 @@ void BattleField::runBattle (Controller ctrl)
         ctrl.updateKey();
         show();
         if (ctrl.getKey() != -1) {
-            if (ctrl.isCurrentAction("CancelAction")) {
+            if (ctrl.isCurrentAction("Exit")) {
                 break;
             }
 
@@ -48,8 +48,40 @@ void BattleField::clear ()
     #endif
 }
 
+
+void BattleField::moveCursorNext (int max)
+{
+    if (cursor == max) {
+        cursor = 0;
+    } else {
+        cursor++;
+    }
+}
+
+void BattleField::moveCursorPrev (int max)
+{
+    if (cursor == 0) {
+        cursor = max;
+    } else {
+        cursor--;
+    }
+}
+
+void BattleField::checkCursorMoving (Controller ctrl, int max)
+{
+    if (ctrl.isCurrentAction("CursorNext")) {
+        moveCursorNext(categories.size()-1);
+    }
+    if (ctrl.isCurrentAction("CursorPrev")) {
+        moveCursorPrev(categories.size()-1);
+    }
+}
+
+
 void BattleField::show () {
     std::cout << currentStep << std::endl;
+    std::cout << cursor      << std::endl;
+    
     showBattleField ();
     showMenu        ();
     showHeros       ();
@@ -78,7 +110,12 @@ void BattleField::showEnemies () {}
 
 void BattleField::chooseCategory (Controller ctrl)
 {
-
+    checkCursorMoving(ctrl, categories.size() - 1);
+    if (ctrl.isCurrentAction("Confirm")) {
+        currentCategory = categories[cursor];
+        currentStep     = "ChoosingAction";
+        cursor          = 0;
+    }
 }
 
 void BattleField::chooseAction (Controller ctrl)
