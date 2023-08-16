@@ -2,13 +2,13 @@
 
 BattleField::BattleField ()
 {
-
+    categories = { "Attack", "Magic", "Inventory", "Run" };
 }
 
 
 void BattleField::runBattle (Controller ctrl)
 {
-    while (1) {
+    while (1) {        
         ctrl.updateKey();
         show();
         if (ctrl.getKey() != -1) {
@@ -57,7 +57,22 @@ void BattleField::show () {
 }
 
 void BattleField::showBattleField () {}
-void BattleField::showMenu () {}
+void BattleField::showMenu () {
+    if (currentStep == "ChoosingCategory") {
+        std::cout << "Categories:" << std::endl;
+        for (int i = 0; i < categories.size(); ++i) {
+            if (i == cursor) {
+                std::cout << " >> ";
+            }
+            std::cout << "\t" << categories[i]  << std::endl;
+        }
+
+    }
+    if (currentStep == "ChoosingAction") {
+        
+    }
+}
+
 void BattleField::showHeros () {}
 void BattleField::showEnemies () {}
 

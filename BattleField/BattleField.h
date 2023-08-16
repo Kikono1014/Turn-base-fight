@@ -14,11 +14,16 @@
 #include "../Unit/Unit.h"
 #include "../Squad/Squad.h"
 
+using std::vector;
 
 class BattleField
 {
 private:
-    string currentStep { "ChoosingCategory" };
+    vector<string> categories {};
+
+    string currentStep     { "ChoosingCategory" };
+    string currentCategory { "" };
+    int    cursor { 0 };
 
 
     void delay (double time);
