@@ -6,21 +6,12 @@
 #include "Unit/Unit.h"
 #include "Squad/Squad.h"
 
-Controller controller { };
+Controller ctrl { };
 
 int main ()
 {
-    
-    while (1) {
-        int key { controller.getKey() };
-        if (key != -1) {
-            std::cout << " " << key << std::endl;
-            if (key == controller.getActionKey("CancelAction")) {
-                break;
-            }
-        }
-    }
-    
+    BattleField battle {  };
+    battle.runBattle(ctrl);    
     return 0;
 }
 
