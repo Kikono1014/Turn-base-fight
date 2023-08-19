@@ -18,7 +18,7 @@ void BattleField::runBattle (Controller ctrl)
         ctrl.updateKey();
         show();
         processAction(ctrl);
-        delay(1/3);
+        // delay(1/3);
         clear();
     }
 }
