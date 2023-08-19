@@ -101,7 +101,7 @@ void BattleField::show () {
     std::cout << currentStep << std::endl;
     std::cout << cursor      << std::endl;
     if (currentStep == "Attacking") {
-        for (string line : log) {
+        for (string line : herosAttackLog) {
             std::cout << line << std::endl;
         }
     }
@@ -179,13 +179,13 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
 void BattleField::writeAttack (Controller ctrl, string executant, string target)
 {
     if (currentCategory == "Attack") {
-        log.push_back(executant + " attack " + target);
+        herosAttackLog.push_back(executant + " attack " + target);
     }
     if (currentCategory == "Magic") {
-        log.push_back(executant + " use " + target);
+        herosAttackLog.push_back(executant + " use " + target);
     }
     if (currentCategory == "Inventory") {
-        log.push_back(executant + " use " + target);
+        herosAttackLog.push_back(executant + " use " + target);
     }
 }
 

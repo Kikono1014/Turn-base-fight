@@ -19,7 +19,7 @@ using std::vector;
 class BattleField
 {
 private:
-    vector<string> log {};
+    vector<string> herosAttackLog {};
 
     vector<string> categories {}; 
     vector<string> spells     {}; // in unit
