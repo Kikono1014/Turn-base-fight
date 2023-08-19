@@ -28,8 +28,11 @@ int Controller::getActionKey (string actionName)
 
 bool Controller::currentActionIs (string actionName)
 {
-
-    return key == controls[actionName];
+    bool res { key == controls[actionName] };
+    if (res) {
+        key = -1;
+    }
+    return res;
 }
 
 Controller::~Controller ()
