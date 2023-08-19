@@ -21,9 +21,9 @@ class BattleField
 private:
     vector<string> log {};
 
-    vector<string> categories {};
-    vector<string> spells     {};
-    vector<string> inventory  {};
+    vector<string> categories {}; 
+    vector<string> spells     {}; // in unit
+    vector<string> inventory  {}; // in squad
 
     vector<string> heros   {};
     vector<string> enemies {};
@@ -54,8 +54,9 @@ private:
     void chooseCategory (Controller ctrl);
 
     void chooseAction   (Controller ctrl, vector<string> *category);
+    void writeAttack    (Controller ctrl, string executant, string target);
 
-    void makeAttack     (Controller ctrl, string executant, string target);
+    void makeAttack     (Controller ctrl);
 
 public:
     BattleField ();

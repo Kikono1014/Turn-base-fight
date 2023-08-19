@@ -158,9 +158,10 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
     checkCursorMoving(ctrl, category->size() - 1);
 
     if (ctrl.currentActionIs("Confirm")) {
+        writeAttack(ctrl, heros[currentHero], (*category)[cursor]);
+        currentCategory = "";
         currentStep     = "Attacking";
         cursor          = 0;
-        makeAttack(ctrl, heros[currentHero], (*category)[cursor]);
     }
     if (ctrl.currentActionIs("Cancel")) {
         currentCategory = "";
@@ -169,7 +170,7 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
     }
 }
 
-void BattleField::makeAttack (Controller ctrl, string executant, string target)
+void BattleField::writeAttack (Controller ctrl, string executant, string target)
 {
     if (currentCategory == "Attack") {
         log.push_back(executant + " attack " + target);
@@ -191,6 +192,7 @@ void BattleField::makeAttack (Controller ctrl, string executant, string target)
 
 }
 
+void BattleField::makeAttack (Controller ctrl) {}
 
 BattleField::~BattleField ()
 {
