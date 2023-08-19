@@ -16,7 +16,7 @@ void BattleField::runBattle (Controller ctrl)
     isRun = true;
     while (isRun) {        
         ctrl.updateKey();
-        show();
+        show(ctrl);
         processAction(ctrl);
         // delay(1/3);
         clear();
@@ -93,13 +93,28 @@ void BattleField::processAction (Controller ctrl)
                 chooseAction(ctrl, &inventory);
             }
         }
+        
+        if (currentCategory == "Run") {
+            writeAttack(ctrl, heros[currentHero], "runaway");
+            currentCategory = "";
+            currentStep     = "ChoosingCategory";
+            cursor          = 0;
+
+            currentHero++;
+            if (currentHero == heros.size()) {
+                currentStep = "Attacking";
+                currentHero = 0;
+            }
+        }
     }   
 }
 
-void BattleField::show () {
-    std::cout << currentHero << std::endl;
-    std::cout << currentStep << std::endl;
-    std::cout << cursor      << std::endl;
+void BattleField::show (Controller ctrl) {
+    std::cout << currentHero     << std::endl;
+    std::cout << currentStep     << std::endl;
+    std::cout << currentCategory << std::endl;
+    std::cout << ctrl.getKey()   << std::endl;
+    std::cout << cursor          << std::endl;
     if (currentStep == "Attacking") {
         for (string line : herosAttackLog) {
             std::cout << line << std::endl;
@@ -125,6 +140,9 @@ void BattleField::showMenu () {
         }
         if (currentCategory == "Inventory") {
             showDirectory(&inventory, "Inventory");
+        }
+        if (currentCategory == "Run") {
+            std::cout << "HAA" << std::endl;
         }
     }
 }
@@ -171,9 +189,9 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
         currentStep     = "ChoosingCategory";
         cursor          = 0;
 
-        currentHero++;        
+        currentHero++;
         if (currentHero == heros.size()) {
-            currentStep     = "Attacking";
+            currentStep = "Attacking";
             currentHero = 0;
         }
     }
@@ -194,6 +212,9 @@ void BattleField::writeAttack (Controller ctrl, string executant, string target)
     }
     if (currentCategory == "Inventory") {
         herosAttackLog.push_back(executant + " use " + target);
+    }
+    if (currentCategory == "Run") {
+        herosAttackLog.push_back(executant + " try " + target);
     }
 }
 

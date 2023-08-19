@@ -44,7 +44,7 @@ private:
 
     void processAction (Controller ctrl);
 
-    void show            ();
+    void show            (Controller ctrl);
     void showBattleField ();
     void showMenu        ();
     void showDirectory   (vector<string> *directory, string name);
