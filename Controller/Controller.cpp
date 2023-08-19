@@ -26,8 +26,9 @@ int Controller::getActionKey (string actionName)
     return controls[actionName];
 }
 
-bool Controller::isCurrentAction (string actionName)
+bool Controller::currentActionIs (string actionName)
 {
+
     return key == controls[actionName];
 }
 

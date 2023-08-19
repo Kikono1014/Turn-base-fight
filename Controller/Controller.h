@@ -16,10 +16,10 @@ private:
     map<string, int> controls {};
 public:
     Controller ();
-    void updateKey          ();
-    int  getKey             ();
-    int  getActionKey       (string actionName);
-    bool isCurrentAction (string actionName);
+    void updateKey       ();
+    int  getKey          ();
+    int  getActionKey    (string actionName);
+    bool currentActionIs (string actionName);
     ~Controller ();
 
 };

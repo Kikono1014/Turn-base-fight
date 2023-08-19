@@ -64,10 +64,10 @@ void BattleField::moveCursorPrev (int max)
 
 void BattleField::checkCursorMoving (Controller ctrl, int max)
 {
-    if (ctrl.isCurrentAction("CursorNext")) {
+    if (ctrl.currentActionIs("CursorNext")) {
         moveCursorNext(categories.size()-1);
     }
-    if (ctrl.isCurrentAction("CursorPrev")) {
+    if (ctrl.currentActionIs("CursorPrev")) {
         moveCursorPrev(categories.size()-1);
     }
 }
@@ -75,7 +75,7 @@ void BattleField::checkCursorMoving (Controller ctrl, int max)
 void BattleField::processAction (Controller ctrl)
 {
     if (ctrl.getKey() != -1) {
-        if (ctrl.isCurrentAction("Exit")) {
+        if (ctrl.currentActionIs("Exit")) {
             isRun = false;
         }
 
@@ -146,7 +146,7 @@ void BattleField::showEnemies () {}
 void BattleField::chooseCategory (Controller ctrl)
 {
     checkCursorMoving(ctrl, categories.size() - 1);
-    if (ctrl.isCurrentAction("Confirm")) {
+    if (ctrl.currentActionIs("Confirm")) {
         currentCategory = categories[cursor];
         currentStep     = "ChoosingAction";
         cursor          = 0;
@@ -157,12 +157,12 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
 {
     checkCursorMoving(ctrl, category->size() - 1);
 
-    if (ctrl.isCurrentAction("Confirm")) {
+    if (ctrl.currentActionIs("Confirm")) {
         currentStep     = "Attacking";
         cursor          = 0;
         makeAttack(ctrl, heros[currentHero], (*category)[cursor]);
     }
-    if (ctrl.isCurrentAction("Cancel")) {
+    if (ctrl.currentActionIs("Cancel")) {
         currentCategory = "";
         currentStep     = "ChoosingCategory";
         cursor          = 0;
