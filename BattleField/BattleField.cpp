@@ -65,10 +65,10 @@ void BattleField::moveCursorPrev (int max)
 void BattleField::checkCursorMoving (Controller ctrl, int max)
 {
     if (ctrl.currentActionIs("CursorNext")) {
-        moveCursorNext(categories.size()-1);
+        moveCursorNext(max);
     }
     if (ctrl.currentActionIs("CursorPrev")) {
-        moveCursorPrev(categories.size()-1);
+        moveCursorPrev(max);
     }
 }
 
