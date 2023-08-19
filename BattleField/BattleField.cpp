@@ -151,6 +151,14 @@ void BattleField::chooseCategory (Controller ctrl)
         currentStep     = "ChoosingAction";
         cursor          = 0;
     }
+    if (ctrl.currentActionIs("Cancel")) {
+        currentHero--;
+        if (currentHero < 0) {
+            currentHero = 0;
+        }
+        herosAttackLog.pop_back();
+        cursor          = 0;
+    }
 }
 
 void BattleField::chooseAction (Controller ctrl, vector<string> *category)
