@@ -93,9 +93,9 @@ void BattleField::processAction (Controller ctrl)
                 chooseAction(ctrl, &inventory);
             }
         }
-        
+
         if (currentCategory == "Run") {
-            writeAttack(ctrl, heros[currentHero], "runaway");
+            writeAction(ctrl, heros[currentHero], "runaway");
             currentCategory = "";
             currentStep     = "ChoosingCategory";
             cursor          = 0;
@@ -184,7 +184,7 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
     checkCursorMoving(ctrl, category->size() - 1);
 
     if (ctrl.currentActionIs("Confirm")) {
-        writeAttack(ctrl, heros[currentHero], (*category)[cursor]);
+        writeAction(ctrl, heros[currentHero], (*category)[cursor]);
         currentCategory = "";
         currentStep     = "ChoosingCategory";
         cursor          = 0;
@@ -202,7 +202,7 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
     }
 }
 
-void BattleField::writeAttack (Controller ctrl, string executant, string target)
+void BattleField::writeAction (Controller ctrl, string executant, string target)
 {
     if (currentCategory == "Attack") {
         herosAttackLog.push_back(executant + " attack " + target);

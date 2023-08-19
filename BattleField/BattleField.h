@@ -54,7 +54,7 @@ private:
     void chooseCategory (Controller ctrl);
 
     void chooseAction   (Controller ctrl, vector<string> *category);
-    void writeAttack    (Controller ctrl, string executant, string target);
+    void writeAction    (Controller ctrl, string executant, string target);
 
     void makeAttack     (Controller ctrl);
 
