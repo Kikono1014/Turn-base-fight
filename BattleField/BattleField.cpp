@@ -13,28 +13,11 @@ BattleField::BattleField ()
 
 void BattleField::runBattle (Controller ctrl)
 {
-    while (1) {        
+    isRun = true;
+    while (isRun) {        
         ctrl.updateKey();
         show();
-        if (ctrl.getKey() != -1) {
-            if (ctrl.isCurrentAction("Exit")) {
-                break;
-            }
-
-            if        (currentStep == "ChoosingCategory") {
-                chooseCategory(ctrl);
-            } else if (currentStep == "ChoosingAction") {
-                if (currentCategory == "Attack") {
-                    chooseAction(ctrl, &enemies);
-                }
-                if (currentCategory == "Magic") {
-                    chooseAction(ctrl, &spells);
-                }
-                if (currentCategory == "Inventory") {
-                    chooseAction(ctrl, &inventory);
-                }
-            }
-        }        
+        processAction(ctrl);
         delay(1/3);
         clear();
     }
@@ -89,6 +72,29 @@ void BattleField::checkCursorMoving (Controller ctrl, int max)
     }
 }
 
+void BattleField::processAction (Controller ctrl)
+{
+    if (ctrl.getKey() != -1) {
+        if (ctrl.isCurrentAction("Exit")) {
+            isRun = false;
+        }
+
+        if (currentStep == "ChoosingCategory") {
+            chooseCategory(ctrl);
+        } else
+        if (currentStep == "ChoosingAction") {
+            if (currentCategory == "Attack") {
+                chooseAction(ctrl, &enemies);
+            }
+            if (currentCategory == "Magic") {
+                chooseAction(ctrl, &spells);
+            }
+            if (currentCategory == "Inventory") {
+                chooseAction(ctrl, &inventory);
+            }
+        }
+    }   
+}
 
 void BattleField::show () {
     std::cout << currentHero << std::endl;

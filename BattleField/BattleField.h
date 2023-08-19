@@ -32,6 +32,7 @@ private:
     string currentCategory { "" };
     int    currentHero     { 0 };
     int    cursor          { 0 };
+    bool   isRun           { false };
 
 
     void delay (double time);
@@ -41,13 +42,14 @@ private:
     void moveCursorPrev    (int max);
     void checkCursorMoving (Controller ctrl, int max);
 
+    void processAction (Controller ctrl);
+
     void show            ();
     void showBattleField ();
     void showMenu        ();
     void showDirectory   (vector<string> *directory, string name);
     void showHeros       ();
     void showEnemies     ();
-
 
     void chooseCategory (Controller ctrl);
 
