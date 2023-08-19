@@ -100,7 +100,7 @@ void BattleField::show () {
     std::cout << currentHero << std::endl;
     std::cout << currentStep << std::endl;
     std::cout << cursor      << std::endl;
-    if (currentStep == "End") {
+    if (currentStep == "Attacking") {
         for (string line : log) {
             std::cout << line << std::endl;
         }
@@ -160,8 +160,14 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
     if (ctrl.currentActionIs("Confirm")) {
         writeAttack(ctrl, heros[currentHero], (*category)[cursor]);
         currentCategory = "";
-        currentStep     = "Attacking";
+        currentStep     = "ChoosingCategory";
         cursor          = 0;
+
+        currentHero++;        
+        if (currentHero == heros.size()) {
+            currentStep     = "Attacking";
+            currentHero = 0;
+        }
     }
     if (ctrl.currentActionIs("Cancel")) {
         currentCategory = "";
@@ -181,15 +187,6 @@ void BattleField::writeAttack (Controller ctrl, string executant, string target)
     if (currentCategory == "Inventory") {
         log.push_back(executant + " use " + target);
     }
-    currentCategory = "";
-    currentStep     = "ChoosingCategory";
-    currentHero++;
-            
-    if (currentHero == heros.size()) {
-        currentStep = "End";
-        currentHero = 0;
-    }
-
 }
 
 void BattleField::makeAttack (Controller ctrl) {}
