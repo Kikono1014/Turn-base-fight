@@ -11,6 +11,8 @@ public:
 
     void update ();
     bool check  ();
+    void skip   ();
+    void reset  ();
 
     ~Timer ();
 
