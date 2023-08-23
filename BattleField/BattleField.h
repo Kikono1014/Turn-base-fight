@@ -23,6 +23,7 @@ using std::map;
 class BattleField
 {
 private:
+    map<string, Timer> timers {};
     map<string, vector<string>> herosActionsLog {};
 
     vector<string> categories {}; 
@@ -35,6 +36,7 @@ private:
     string currentStep     { "ChoosingCategory" };
     string currentCategory { "" };
     int    currentHero     { 0 };
+    int    attackStep      { 0 };
     int    cursor          { 0 };
     bool   isRun           { false };
 

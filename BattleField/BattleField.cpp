@@ -92,6 +92,9 @@ void BattleField::processAction (Controller ctrl)
             if (currentCategory == "Inventory") {
                 chooseAction(ctrl, &inventory);
             }
+        } else
+        if (currentStep == "Attacking") {
+            makeAttack(ctrl);
         }
 
         if (currentCategory == "Run") {
@@ -115,11 +118,7 @@ void BattleField::show (Controller ctrl) {
     std::cout << currentCategory << std::endl;
     std::cout << ctrl.getKey()   << std::endl;
     std::cout << cursor          << std::endl;
-    if (currentStep == "Attacking") {
-        for (auto& [key, val] : herosActionsLog) {
-            std::cout << key << " " << val[0]<< " " << val[1]<< std::endl;
-        }
-    }
+    std::cout << "----------------------------------------------" << std::endl;
     showBattleField ();
     showMenu        ();
     showHeros       ();
@@ -191,6 +190,7 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
         currentHero++;
         if (currentHero == heros.size()) {
             currentStep = "Attacking";
+            timers["AttackTimer"] = Timer(100);
             currentHero = 0;
         }
     }
@@ -217,7 +217,21 @@ void BattleField::writeAction (Controller ctrl, string executant, string target)
     }
 }
 
-void BattleField::makeAttack (Controller ctrl) {}
+void BattleField::makeAttack (Controller ctrl)
+{
+    timers["AttackTimer"].update();
+    if (timers["AttackTimer"].check()) {
+        attackStep++;
+    }
+    if (attackStep == herosActionsLog.size()) {
+        attackStep = 0;
+        currentStep = "ChooseCategory";
+    }
+    string executant { heros[attackStep] };
+    string action    { herosActionsLog[executant][0] };
+    string target    { herosActionsLog[executant][1] };
+    std::cout << executant << " " << action << " " << target << std::endl;
+}
 
 BattleField::~BattleField ()
 {

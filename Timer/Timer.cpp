@@ -1,5 +1,11 @@
 #include "Timer.h"
 
+
+Timer::Timer ()
+{
+
+}
+
 Timer::Timer (int lim)
 {
     limit = lim;

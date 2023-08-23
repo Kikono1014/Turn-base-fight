@@ -4,9 +4,10 @@
 class Timer
 {
 private:
-    int timer { };
-    int limit { };
+    int timer { 0 };
+    int limit { 0 };
 public:
+    Timer ();
     Timer (int lim);
 
     void update ();
