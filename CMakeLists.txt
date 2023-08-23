@@ -10,6 +10,7 @@ message(STATUS "Compile with static library? ${USE_STATIC}")
 add_executable(TBFight
     main.cpp
     lib/Key/Key.cpp
+    Timer/Timer.cpp
     BattleField/BattleField.cpp
     Controller/Controller.cpp
     Spell/Spell.cpp
