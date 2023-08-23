@@ -78,9 +78,21 @@ void BattleField::processAction (Controller ctrl)
         if (ctrl.currentActionIs("Exit")) {
             isRun = false;
         }
+        if (ctrl.currentActionIs("Confirm")) {
+            if (currentStep == "Attacking") {
+                timers["AttackTimer"].reset();
+            }
+        }
 
         if (currentStep == "ChoosingCategory") {
             chooseCategory(ctrl);
+            if (currentCategory == "Run") {
+                writeAction(ctrl, heros[currentHero], "runaway");
+                currentCategory = "";
+                currentStep     = "ChoosingCategory";
+                cursor          = 0;
+                currentHero++;
+            }
         } else
         if (currentStep == "ChoosingAction") {
             if (currentCategory == "Attack") {
@@ -94,17 +106,10 @@ void BattleField::processAction (Controller ctrl)
             }
         }
 
-        if (currentCategory == "Run") {
-            writeAction(ctrl, heros[currentHero], "runaway");
-            currentCategory = "";
-            currentStep     = "ChoosingCategory";
-            cursor          = 0;
-
-            currentHero++;
-            if (currentHero == heros.size()) {
-                currentStep = "Attacking";
-                currentHero = 0;
-            }
+        if (currentHero == heros.size()) {
+            currentStep = "Attacking";
+            timers["AttackTimer"] = Timer(1000);
+            currentHero = 0;
         }
     }   
 }
@@ -207,11 +212,6 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
         cursor          = 0;
 
         currentHero++;
-        if (currentHero == heros.size()) {
-            currentStep = "Attacking";
-            timers["AttackTimer"] = Timer(1000);
-            currentHero = 0;
-        }
     }
     if (ctrl.currentActionIs("Cancel")) {
         currentCategory = "";
