@@ -116,8 +116,8 @@ void BattleField::show (Controller ctrl) {
     std::cout << ctrl.getKey()   << std::endl;
     std::cout << cursor          << std::endl;
     if (currentStep == "Attacking") {
-        for (string line : herosAttackLog) {
-            std::cout << line << std::endl;
+        for (auto& [key, val] : herosActionsLog) {
+            std::cout << key << " " << val[0]<< " " << val[1]<< std::endl;
         }
     }
     showBattleField ();
@@ -174,7 +174,6 @@ void BattleField::chooseCategory (Controller ctrl)
         if (currentHero < 0) {
             currentHero = 0;
         }
-        herosAttackLog.pop_back();
         cursor          = 0;
     }
 }
@@ -205,16 +204,16 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
 void BattleField::writeAction (Controller ctrl, string executant, string target)
 {
     if (currentCategory == "Attack") {
-        herosAttackLog.push_back(executant + " attack " + target);
+        herosActionsLog[executant] = { "attack", target };
     }
     if (currentCategory == "Magic") {
-        herosAttackLog.push_back(executant + " use " + target);
+        herosActionsLog[executant] = { "magic",  target };
     }
     if (currentCategory == "Inventory") {
-        herosAttackLog.push_back(executant + " use " + target);
+        herosActionsLog[executant] = { "use",    target };
     }
     if (currentCategory == "Run") {
-        herosAttackLog.push_back(executant + " try " + target);
+        herosActionsLog[executant] = { "run",    target };
     }
 }
 

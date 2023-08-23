@@ -2,6 +2,7 @@
 #define BATTLEFIELD_H
 #include <iostream>
 #include <vector>
+#include <map>
 
 #if defined _WIN32
     #include "windows.h"
@@ -15,11 +16,12 @@
 #include "../Squad/Squad.h"
 
 using std::vector;
+using std::map;
 
 class BattleField
 {
 private:
-    vector<string> herosAttackLog {};
+    map<string, vector<string>> herosActionsLog {};
 
     vector<string> categories {}; 
     vector<string> spells     {}; // in unit
