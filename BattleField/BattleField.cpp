@@ -18,7 +18,7 @@ void BattleField::runBattle (Controller ctrl)
         ctrl.updateKey();
         show(ctrl);
         processAction(ctrl);
-        delay(1/3);
+        delay(0.001);
         clear();
     }
 }
@@ -209,7 +209,7 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
         currentHero++;
         if (currentHero == heros.size()) {
             currentStep = "Attacking";
-            timers["AttackTimer"] = Timer(100);
+            timers["AttackTimer"] = Timer(1000);
             currentHero = 0;
         }
     }
