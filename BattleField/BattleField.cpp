@@ -80,7 +80,7 @@ void BattleField::processAction (Controller ctrl)
         }
         if (ctrl.currentActionIs("Confirm")) {
             if (currentStep == "Attacking") {
-                timers["AttackTimer"].reset();
+                timers["AttackTimer"].skip();
             }
         }
 
