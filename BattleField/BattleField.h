@@ -56,13 +56,12 @@ private:
     void showDirectory   (vector<string> *directory, string name);
     void showHeros       ();
     void showEnemies     ();
+    void showAttack      ();
 
     void chooseCategory (Controller ctrl);
 
     void chooseAction   (Controller ctrl, vector<string> *category);
     void writeAction    (Controller ctrl, string executant, string target);
-
-    void makeAttack     (Controller ctrl);
 
 public:
     BattleField ();

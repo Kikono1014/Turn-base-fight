@@ -18,7 +18,7 @@ void BattleField::runBattle (Controller ctrl)
         ctrl.updateKey();
         show(ctrl);
         processAction(ctrl);
-        // delay(1/3);
+        delay(1/3);
         clear();
     }
 }
@@ -92,9 +92,6 @@ void BattleField::processAction (Controller ctrl)
             if (currentCategory == "Inventory") {
                 chooseAction(ctrl, &inventory);
             }
-        } else
-        if (currentStep == "Attacking") {
-            makeAttack(ctrl);
         }
 
         if (currentCategory == "Run") {
@@ -119,10 +116,12 @@ void BattleField::show (Controller ctrl) {
     std::cout << ctrl.getKey()   << std::endl;
     std::cout << cursor          << std::endl;
     std::cout << "----------------------------------------------" << std::endl;
+    
     showBattleField ();
     showMenu        ();
     showHeros       ();
     showEnemies     ();
+    showAttack      ();
 }
 
 void BattleField::showBattleField () {}
@@ -159,6 +158,26 @@ void BattleField::showDirectory (vector<string> *directory, string name)
 
 void BattleField::showHeros () {}
 void BattleField::showEnemies () {}
+
+void BattleField::showAttack ()
+{
+    if (currentStep == "Attacking") {
+        timers["AttackTimer"].update();
+        if (timers["AttackTimer"].check()) {
+            attackStep++;
+        }
+        
+        if (attackStep == herosActionsLog.size()) {
+            attackStep = 0;
+            currentStep = "ChoosingCategory";
+        } else {
+            string executant { heros[attackStep] };
+            string action    { herosActionsLog[executant][0] };
+            string target    { herosActionsLog[executant][1] };
+            std::cout << executant << " " << action << " " << target << std::endl;
+        }
+    }
+}
 
 void BattleField::chooseCategory (Controller ctrl)
 {
@@ -215,22 +234,6 @@ void BattleField::writeAction (Controller ctrl, string executant, string target)
     if (currentCategory == "Run") {
         herosActionsLog[executant] = { "run",    target };
     }
-}
-
-void BattleField::makeAttack (Controller ctrl)
-{
-    timers["AttackTimer"].update();
-    if (timers["AttackTimer"].check()) {
-        attackStep++;
-    }
-    if (attackStep == herosActionsLog.size()) {
-        attackStep = 0;
-        currentStep = "ChooseCategory";
-    }
-    string executant { heros[attackStep] };
-    string action    { herosActionsLog[executant][0] };
-    string target    { herosActionsLog[executant][1] };
-    std::cout << executant << " " << action << " " << target << std::endl;
 }
 
 BattleField::~BattleField ()
