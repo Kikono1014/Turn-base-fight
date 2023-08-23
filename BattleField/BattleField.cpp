@@ -78,8 +78,8 @@ void BattleField::processAction (Controller ctrl)
         if (ctrl.currentActionIs("Exit")) {
             isRun = false;
         }
-        if (ctrl.currentActionIs("Confirm")) {
-            if (currentStep == "Attacking") {
+        if (currentStep == "Attacking") {
+            if (ctrl.currentActionIs("Confirm")) {
                 timers["AttackTimer"].skip();
             }
         }
