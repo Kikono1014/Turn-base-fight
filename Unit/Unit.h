@@ -35,6 +35,9 @@ public:
         int ATK, int DEF, int INT, int RES, int DEX 
     );
 
+    string getName ();
+    string getType ();
+
     int getLVL   ();
     int getXP    ();
     int getHP    ();
@@ -46,6 +49,10 @@ public:
     int getINT   ();
     int getRES   ();
     int getDEX   ();
+
+
+    void setName (string name);
+    void setType (string type);
 
     void setLVL   (int LVL  );
     void setXP    (int XP   );

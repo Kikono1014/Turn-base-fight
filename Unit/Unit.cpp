@@ -8,6 +8,8 @@ Unit::Unit (
         int ATK, int DEF, int INT, int RES, int DEX 
     )
 {
+    this->name  = name ;
+    this->type  = type ;
     this->LVL   = LVL  ;
     this->XP    = XP   ;
     this->HP    = HP   ;
@@ -21,6 +23,10 @@ Unit::Unit (
     this->DEX   = DEX  ;
 }
 
+
+string Unit::getName () { return name; }
+string Unit::getType () { return type; }
+
 int Unit::getLVL   () { return LVL   ; }
 int Unit::getXP    () { return XP    ; }
 int Unit::getHP    () { return HP    ; }
@@ -32,6 +38,10 @@ int Unit::getDEF   () { return DEF   ; }
 int Unit::getINT   () { return INT   ; }
 int Unit::getRES   () { return RES   ; }
 int Unit::getDEX   () { return DEX   ; }
+
+
+void Unit::setName  (string name) { this->name = name; }
+void Unit::setType  (string type) { this->type = type; }
 
 void Unit::setLVL   (int LVL  ) { this->LVL   = LVL  ; }
 void Unit::setXP    (int XP   ) { this->XP    = XP   ; }

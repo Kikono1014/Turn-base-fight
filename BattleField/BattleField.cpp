@@ -1,12 +1,12 @@
 #include "BattleField.h"
 
-BattleField::BattleField ()
+BattleField::BattleField (vector<string> heros)
 {
     categories = { "Attack", "Magic", "Inventory", "Run" };
     spells     = { "Spell1", "Spell2", "Spell3", "Spell4" };
     inventory  = { "Potion1", "Potion2" };
 
-    heros   = { "Hero1", "Hero2", "Hero3" };
+    this->heros   = heros;
     enemies = { "Enemy1", "Enemy2", "Enemy3", "Enemy4" };
 }
 

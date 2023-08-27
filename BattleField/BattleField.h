@@ -64,7 +64,7 @@ private:
     void writeAction    (Controller ctrl, string executant, string target);
 
 public:
-    BattleField ();
+    BattleField (vector<string> heros);
 
     void runBattle (Controller ctrl);
 

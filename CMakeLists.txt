@@ -15,6 +15,7 @@ add_executable(TBFight
     Controller/Controller.cpp
     Spell/Spell.cpp
     Unit/Unit.cpp
+    Hero/Hero.cpp
     Squad/Squad.cpp
 ) 
 
