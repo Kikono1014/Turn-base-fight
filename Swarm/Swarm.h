@@ -12,15 +12,7 @@ class Swarm
 private:
     vector<Enemy> enemies {};
 public:
-    Swarm (Enemy enemy1 = Enemy(), 
-           Enemy enemy2 = Enemy(),
-           Enemy enemy3 = Enemy(), 
-           Enemy enemy4 = Enemy(),
-           Enemy enemy5 = Enemy(), 
-           Enemy enemy6 = Enemy(),
-           Enemy enemy7 = Enemy(), 
-           Enemy enemy8 = Enemy(),
-           Enemy enemy9 = Enemy());
+    Swarm (vector<Enemy> enemies = {});
     
     Enemy* getEnemy (int id);
 

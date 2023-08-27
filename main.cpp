@@ -81,7 +81,7 @@ int main ()
         10, 20, 10, 10, 20
     };
 
-    Swarm enemies { e1, e2, e3, e4 };
+    Swarm enemies { {e1, e2, e3, e4} };
 
     BattleField battle { heros, enemies };
     battle.runBattle(ctrl);    
