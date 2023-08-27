@@ -1,6 +1,6 @@
 #include "BattleField.h"
 
-BattleField::BattleField (vector<string> heros)
+BattleField::BattleField (Squad heros)
 {
     categories = { "Attack", "Magic", "Inventory", "Run" };
     spells     = { "Spell1", "Spell2", "Spell3", "Spell4" };
@@ -87,7 +87,7 @@ void BattleField::processAction (Controller ctrl)
         if (currentStep == "ChoosingCategory") {
             chooseCategory(ctrl);
             if (currentCategory == "Run") {
-                writeAction(ctrl, heros[currentHero], "runaway");
+                writeAction(ctrl, heros.getHero(currentHero), "runaway");
                 currentCategory = "";
                 currentStep     = "ChoosingCategory";
                 cursor          = 0;
@@ -106,7 +106,7 @@ void BattleField::processAction (Controller ctrl)
             }
         }
 
-        if (currentHero == heros.size()) {
+        if (currentHero == heros.getHeros().size()) {
             currentStep = "Attacking";
             timers["AttackTimer"] = Timer(1000);
             currentHero = 0;
@@ -172,14 +172,14 @@ void BattleField::showAttack ()
             attackStep++;
         }
         
-        if (attackStep == herosActionsLog.size()) {
+        if (attackStep == actionsLog.size()) {
             attackStep = 0;
             currentStep = "ChoosingCategory";
         } else {
-            string executant { heros[attackStep] };
-            string action    { herosActionsLog[executant][0] };
-            string target    { herosActionsLog[executant][1] };
-            std::cout << executant << " " << action << " " << target << std::endl;
+            Unit*  executant { heros.getHero(attackStep) };
+            string action    { actionsLog[executant][0] };
+            string target    { actionsLog[executant][1] };
+            std::cout << executant->getName() << " " << action << " " << target << std::endl;
         }
     }
 }
@@ -206,7 +206,7 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
     checkCursorMoving(ctrl, category->size() - 1);
 
     if (ctrl.currentActionIs("Confirm")) {
-        writeAction(ctrl, heros[currentHero], (*category)[cursor]);
+        writeAction(ctrl, heros.getHero(currentHero), (*category)[cursor]);
         currentCategory = "";
         currentStep     = "ChoosingCategory";
         cursor          = 0;
@@ -220,19 +220,19 @@ void BattleField::chooseAction (Controller ctrl, vector<string> *category)
     }
 }
 
-void BattleField::writeAction (Controller ctrl, string executant, string target)
+void BattleField::writeAction (Controller ctrl, Unit* executant, string target)
 {
     if (currentCategory == "Attack") {
-        herosActionsLog[executant] = { "attack", target };
+        actionsLog[executant] = { "attack", target };
     }
     if (currentCategory == "Magic") {
-        herosActionsLog[executant] = { "magic",  target };
+        actionsLog[executant] = { "magic",  target };
     }
     if (currentCategory == "Inventory") {
-        herosActionsLog[executant] = { "use",    target };
+        actionsLog[executant] = { "use",    target };
     }
     if (currentCategory == "Run") {
-        herosActionsLog[executant] = { "run",    target };
+        actionsLog[executant] = { "run",    target };
     }
 }
 

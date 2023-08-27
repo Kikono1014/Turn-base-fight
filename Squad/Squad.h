@@ -12,7 +12,10 @@ class Squad
 private:
     vector<Hero> heros {};
 public:
-    Squad (Hero h1, Hero h2, Hero h3, Hero h4);
+    Squad (Hero hero1 = Hero(), 
+           Hero hero2 = Hero(),
+           Hero hero3 = Hero(), 
+           Hero hero4 = Hero());
     
     Hero* getHero (int id);
 

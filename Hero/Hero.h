@@ -14,6 +14,7 @@ class Hero : public Unit
 private:
     map<string, string> spells {}; // second type must be Spell
 public:
+    Hero ();
     Hero (
         string name, string type,
         int LVL, int XP,

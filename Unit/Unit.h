@@ -27,6 +27,7 @@ private:
     int DEX { 0 }; // dexterity
 
 public:
+    Unit();
     Unit (
         string name, string type,
         int LVL, int XP,

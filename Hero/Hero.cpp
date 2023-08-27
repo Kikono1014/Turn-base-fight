@@ -1,5 +1,9 @@
 #include "Hero.h"
 
+Hero::Hero () {
+
+}
+
 Hero::Hero (
         string name, string type,
         int LVL, int XP,

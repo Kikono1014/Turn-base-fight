@@ -44,15 +44,8 @@ int main ()
         10, 20, 10, 10, 20
     };
 
-    Squad squad { h1, h2, h3, h4 };
-
-    vector<string> heros {};
+    Squad heros { h1, h2, h3, h4 };
     
-    for (Hero h : squad.getHeros()) {
-        heros.push_back(h.getName());
-    }
-
-
     BattleField battle { heros };
     battle.runBattle(ctrl);    
     return 0;

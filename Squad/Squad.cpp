@@ -1,11 +1,11 @@
 #include "Squad.h"
 
-Squad::Squad (Hero h1, Hero h2, Hero h3, Hero h4)
+Squad::Squad (Hero hero1, Hero hero2, Hero hero3, Hero hero4)
 {
-    heros.push_back(h1);
-    heros.push_back(h2);
-    heros.push_back(h3);
-    heros.push_back(h4);
+    heros.push_back(hero1);
+    heros.push_back(hero2);
+    heros.push_back(hero3);
+    heros.push_back(hero4);
 }
 
 Hero*        Squad::getHero  (int id) { return &heros[id]; }

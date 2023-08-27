@@ -24,13 +24,13 @@ class BattleField
 {
 private:
     map<string, Timer> timers {};
-    map<string, vector<string>> herosActionsLog {};
+    map<Unit*, vector<string>> actionsLog {};
 
     vector<string> categories {}; 
     vector<string> spells     {}; // in unit
     vector<string> inventory  {}; // in squad
 
-    vector<string> heros   {};
+    Squad heros {};
     vector<string> enemies {};
 
     string currentStep     { "ChoosingCategory" };
@@ -61,10 +61,10 @@ private:
     void chooseCategory (Controller ctrl);
 
     void chooseAction   (Controller ctrl, vector<string> *category);
-    void writeAction    (Controller ctrl, string executant, string target);
+    void writeAction    (Controller ctrl, Unit* executant, string target);
 
 public:
-    BattleField (vector<string> heros);
+    BattleField (Squad heros);
 
     void runBattle (Controller ctrl);
 

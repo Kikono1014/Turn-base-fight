@@ -1,5 +1,10 @@
 #include "Unit.h"
 
+Unit::Unit ()
+{
+    
+}
+
 Unit::Unit (
         string name, string type,
         int LVL, int XP,
