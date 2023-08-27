@@ -12,7 +12,12 @@ using std::map;
 class Hero : public Unit
 {
 private:
-    map<string, string> spells {}; // second type must be Spell
+    map<string, string> spells {
+        { "AttackType", "Spell1" },
+        { "AttackType", "Spell2" },
+        { "AttackType", "Spell3" },
+        { "AttackType", "Spell4" }
+    }; // second type must be Spell
 public:
     Hero ();
     Hero (

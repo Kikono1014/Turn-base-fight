@@ -17,6 +17,8 @@ add_executable(TBFight
     Unit/Unit.cpp
     Hero/Hero.cpp
     Squad/Squad.cpp
+    Enemy/Enemy.cpp
+    Swarm/Swarm.cpp
 ) 
 
 

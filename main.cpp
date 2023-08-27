@@ -7,6 +7,8 @@
 #include "Unit/Unit.h"
 #include "Hero/Hero.h"
 #include "Squad/Squad.h"
+#include "Enemy/Enemy.h"
+#include "Swarm/Swarm.h"
 
 Controller ctrl { };
 
@@ -46,7 +48,42 @@ int main ()
 
     Squad heros { h1, h2, h3, h4 };
     
-    BattleField battle { heros };
+
+    Enemy e1 {
+        "Enemy1", "Goblin",
+        0, 0,
+        50, 0,
+        50, 0,
+        10, 20, 10, 10, 20
+    };
+
+    Enemy e2 {
+        "Enemy2", "Goblin",
+        0, 0,
+        50, 0,
+        50, 0,
+        10, 20, 10, 10, 20
+    };
+
+    Enemy e3 {
+        "Enemy3", "Goblin",
+        0, 0,
+        50, 0,
+        50, 0,
+        10, 20, 10, 10, 20
+    };
+
+    Enemy e4 {
+        "Enemy4", "Goblin",
+        0, 0,
+        50, 0,
+        50, 0,
+        10, 20, 10, 10, 20
+    };
+
+    Swarm enemies { e1, e2, e3, e4 };
+
+    BattleField battle { heros, enemies };
     battle.runBattle(ctrl);    
     return 0;
 }
