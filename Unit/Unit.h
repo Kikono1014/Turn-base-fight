@@ -2,8 +2,10 @@
 #define UNIT_H
 
 #include <iostream>
+#include <vector>
 
 using std::string;
+using std::vector;
 
 class Unit
 {
@@ -25,6 +27,9 @@ private:
     int INT { 0 }; // intelligence
     int RES { 0 }; // resistance
     int DEX { 0 }; // dexterity
+
+
+    vector<string> spells { "Spell1", "Spell2", "Spell3", "Spell4" }; // second type must be Spell
 
 public:
     Unit();
@@ -51,6 +56,8 @@ public:
     int getRES   ();
     int getDEX   ();
 
+    vector<string> getSpells ();
+
 
     void setName (string name);
     void setType (string type);
@@ -66,6 +73,8 @@ public:
     void setINT   (int INT  );
     void setRES   (int RES  );
     void setDEX   (int DEX  );
+
+    void setSpells (vector<string> spells);
 
     void die ();
 
