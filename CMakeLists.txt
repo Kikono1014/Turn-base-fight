@@ -12,6 +12,7 @@ add_executable(TBFight
     lib/Key/Key.cpp
     Timer/Timer.cpp
     BattleField/BattleField.cpp
+    Action/Action.cpp
     Controller/Controller.cpp
     Spell/Spell.cpp
     Unit/Unit.cpp
