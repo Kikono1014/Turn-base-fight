@@ -47,6 +47,8 @@ int main ()
     };
 
     Squad heros { h1, h2, h3, h4 };
+
+    heros.setInventory({ "Item1", "Item2", "Item3", "Item4", "Item5" });
     
 
     Enemy e1 {

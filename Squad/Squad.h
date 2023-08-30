@@ -10,7 +10,8 @@ using std::vector;
 class Squad
 {
 private:
-    vector<Hero> heros {};
+    vector<Hero>   heros     {};
+    vector<string> inventory {};
 public:
     Squad (Hero hero1 = Hero(), 
            Hero hero2 = Hero(),
@@ -19,7 +20,10 @@ public:
     
     Hero* getHero (int id);
 
-    vector<Hero> getHeros ();
+    vector<Hero>   getHeros ();
+    vector<string> getInventory ();
+
+    void setInventory (vector<string> inventory);
 
     ~Squad ();
 
