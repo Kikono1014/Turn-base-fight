@@ -2,12 +2,7 @@
 
 BattleField::BattleField (Squad heros, Swarm enemies)
 {
-    // categories = { "Attack", "Magic", "Inventory", "Run" };
-
-    categories = { "Attack", "Magic", "Inventory" };
-
-    // spells     = { "Spell1", "Spell2", "Spell3", "Spell4" };
-    // inventory  = { "Potion1", "Potion2" };
+    categories = { "Attack", "Magic", "Inventory", "Run" };
 
     this->heros   = heros;
     this->enemies = enemies;
@@ -121,13 +116,13 @@ void BattleField::processAction (Controller ctrl)
 
         if (currentStep == "ChoosingCategory") {
             chooseCategory(ctrl);
-            // if (currentCategory == "Run") {
-            //     // writeAction(ctrl, heros.getHero(currentHero));
-            //     currentCategory = "";
-            //     currentStep     = "ChoosingCategory";
-            //     cursor          = 0;
-            //     currentHero++;
-            // }
+            if (currentCategory == "Run") {
+                // writeAction(ctrl, heros.getHero(currentHero));
+                currentCategory = "";
+                currentStep     = "ChoosingCategory";
+                cursor          = 0;
+                currentHero++;
+            }
         } else
         if (currentStep == "ChoosingAction") {
             if (currentCategory == "Attack") {
@@ -183,9 +178,6 @@ void BattleField::showMenu () {
             // showDirectory(makeNamesList(makeNamesList(heros.getInventory()), "Inventory");
             showDirectory(heros.getInventory(), "Inventory");
         }
-        // if (currentCategory == "Run") {
-        //     std::cout << "HAA" << std::endl;
-        // }
     }
 }
 
