@@ -26,11 +26,9 @@ class BattleField
 {
 private:
     map<string, Timer> timers {};
-    map<Unit*, map<Unit*, string>> actionsLog {};
+    vector<Action>     actionsLog {};
 
-    vector<string> categories {}; 
-    // vector<string> spells     {}; // in unit
-    // vector<string> inventory  {}; // in squad
+    vector<string> categories {};
 
     Squad heros   {};
     Swarm enemies {};
@@ -68,7 +66,7 @@ private:
     void chooseCategory (Controller ctrl);
 
     void chooseAction   (Controller ctrl, vector<string> category);
-    // void writeAction    (Controller ctrl, Unit* executant, Unit* target);
+    void writeAction    (string type, Unit* executant = {}, Unit* target = {});
 
 public:
     BattleField (Squad heros, Swarm enemies);

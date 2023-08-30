@@ -16,6 +16,14 @@ private:
 public:
     Action (string type, Unit* executant = {}, Unit* target = {});
 
+    string getType      ();
+    Unit*  getExecutant ();
+    Unit*  getTarget    ();
+
+    void setType      (string type     );
+    void setExecutant (Unit*  executant);
+    void setTarget    (Unit*  target   );
+
     ~Action ();
 
 };
