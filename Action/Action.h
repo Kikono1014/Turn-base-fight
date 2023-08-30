@@ -12,6 +12,8 @@ private:
     string type      {};
     Unit*  executant {};
     Unit*  target    {};
+    // Item*  usedItem  {};
+    // Spell*  usedSpell  {};
 
 public:
     Action (string type, Unit* executant = {}, Unit* target = {});
