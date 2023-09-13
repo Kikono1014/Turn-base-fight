@@ -46,7 +46,8 @@ void BattleField::moveCursorNext (int max)
 {
     if (cursor == max) {
         cursor = 0;
-    } else {
+    }
+    else {
         cursor++;
     }
 }
@@ -55,7 +56,8 @@ void BattleField::moveCursorPrev (int max)
 {
     if (cursor == 0) {
         cursor = max;
-    } else {
+    }
+    else {
         cursor--;
     }
 }
@@ -123,8 +125,8 @@ void BattleField::processAction (Controller ctrl)
                 cursor          = 0;
                 currentHero++;
             }
-        } else
-        if (currentStep == "ChoosingAction") {
+        }
+        else if (currentStep == "ChoosingAction") {
             if (currentCategory == "Attack") {
                 chooseAction(ctrl, makeNamesList(enemies.getEnemies()));
             }
@@ -207,7 +209,8 @@ void BattleField::showAttack ()
             attackStep = 0;
             actionsLog.clear();
             currentStep = "ChoosingCategory";
-        } else {
+        }
+        else {
             if (actionsLog[attackStep].getType() == "Attack") {
                 std::cout << 
                     actionsLog[attackStep].getType()                 << " " << 
