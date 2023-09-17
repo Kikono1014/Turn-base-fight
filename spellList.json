@@ -1,1 +1,16 @@
- 
+[
+    {
+        "name": "HealPotion",
+        "type": "HP",
+        "useType": "changeStatOnce",
+        "turns": 1,
+        "value": 10
+    },
+    {
+        "name": "ManaPotion",
+        "type": "MP",
+        "useType": "changeStatOnce",
+        "turns": 1,
+        "value": 10
+    }
+]

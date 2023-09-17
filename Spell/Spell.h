@@ -15,12 +15,14 @@ private:
     string name    {};
     string type    {};
     string useType {};
+    int    turns   {};
     int    value   {};
     void (*useSpell) (Unit* executant, Unit* target) {};
 
     
     json readFromJson ();
-    void TryParseJson ();
+    void tryParseJson ();
+    void createSpellByNameFromList (string name);
 public:
     Spell ();
     Spell (string name);
