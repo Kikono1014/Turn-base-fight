@@ -66,7 +66,12 @@ private:
     void chooseCategory (Controller ctrl);
 
     void chooseAction   (Controller ctrl, vector<string> category);
-    void writeAction    (string type, Unit* executant = {}, Unit* target = {});
+    
+    void writeAction (string type, Unit* executant);
+    void writeAction (string type, Unit* executant, Unit* target);
+    // void writeAction (string type, Unit* executant, Unit* target, Item*  usedItem);
+    void writeAction (string type, Unit* executant, Unit* target, Spell* usedSpell);
+    
 
 public:
     BattleField (Squad heros, Swarm enemies);

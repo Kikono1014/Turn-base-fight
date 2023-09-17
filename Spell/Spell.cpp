@@ -1,5 +1,6 @@
 #include "Spell.h"
 
+
 Spell::Spell ()
 {
 
@@ -47,12 +48,31 @@ void Spell::createSpellByNameFromList (string name)
             useType = spell["useType"];
             turns   = spell["turns"];
             value   = spell["value"];
+            if (type == "changeStatOnce") {
+                useSpell = (&useChangeStatOnceType);
+            }
         }
     }
     std::cout << std::endl;
 }
 
+void Spell::use (Unit* executant, Unit* target, Spell* spell)
+{
+    useSpell(executant, target, spell);
+}
+
 Spell::~Spell ()
 {
 
+}
+
+
+void useChangeStatOnceType (Unit* executant, Unit* target, Spell* spell)
+{
+    if (spell->getType() == "HP") {
+        target->setHP(target->getHP() + spell->getValue());
+    }
+    if (spell->getType() == "MP") {
+        target->setMP(target->getMP() + spell->getValue());
+    }
 }

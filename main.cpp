@@ -46,7 +46,7 @@ int main ()
         50, 0,
         10, 20, 10, 10, 20
     };
-    h1.setSpells({ Spell("Heal"), Spell("Heal") });
+    h1.setSpells({ Spell("HealPotion"), Spell("HealPotion"), Spell("HealPotion"), Spell("ManaPotion") });
     Squad heros { h1, h2, h3, h4 };
 
     heros.setInventory({ "Item1", "Item2", "Item3", "Item4", "Item5" });
@@ -90,6 +90,3 @@ int main ()
     battle.runBattle(ctrl);    
     return 0;
 }
-
-
-

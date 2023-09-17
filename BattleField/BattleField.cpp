@@ -118,7 +118,7 @@ void BattleField::processAction (Controller ctrl)
         if (currentStep == "ChoosingCategory") {
             chooseCategory(ctrl);
             if (currentCategory == "Run") {
-                writeAction("run", heros.getHero(currentHero));
+                writeAction("Run", heros.getHero(currentHero));
                 currentCategory = "";
                 currentStep     = "ChoosingCategory";
                 cursor          = 0;
@@ -137,6 +137,10 @@ void BattleField::processAction (Controller ctrl)
                 chooseAction(ctrl, heros.getInventory());
             }
         }
+        else if (currentStep == "ChoosingMagicTarget") {
+            // chooseTarget(ctrl, makeNamesList(heros.getHeros()));
+            // chooseTarget(ctrl, makeNamesList(enemies.getEnemies()));
+        }
 
         if (currentHero == heros.getHeros().size()) {
             currentStep = "Attacking";
@@ -152,6 +156,9 @@ void BattleField::show (Controller ctrl) {
     std::cout << currentCategory                           << std::endl;
     std::cout << ctrl.getKey()                             << std::endl;
     std::cout << cursor                                    << std::endl;
+    for (Hero hero : heros.getHeros()) {
+        std::cout << hero.getName() << " " << hero.getHP() << std::endl;
+    }
     std::cout << "----------------------------------------------" << std::endl;
     
     showBattleField ();
@@ -210,12 +217,26 @@ void BattleField::showAttack ()
         else {
             if (actionsLog[attackStep].getType() == "Attack") {
                 std::cout << 
-                    actionsLog[attackStep].getType()                 << " " << 
                     actionsLog[attackStep].getExecutant()->getName() << " " << 
+                    "attack"                                         << " " << 
                     actionsLog[attackStep].getTarget()->getName()
                 << std::endl;
             }
-            if (actionsLog[attackStep].getType() == "run") {
+            if (actionsLog[attackStep].getType() == "Magic") {
+                std::cout << 
+                    actionsLog[attackStep].getExecutant()->getName() << " " << 
+                    "used"                                           << " " << 
+                    actionsLog[attackStep].getUsedSpell()->getName() << " " << 
+                    "to"                                             << " " << 
+                    actionsLog[attackStep].getTarget()->getName()
+                << std::endl;
+                actionsLog[attackStep].getUsedSpell()->use(
+                        actionsLog[attackStep].getExecutant(),
+                        actionsLog[attackStep].getTarget(),
+                        actionsLog[attackStep].getUsedSpell()
+                    );
+            }
+            if (actionsLog[attackStep].getType() == "Run") {
                 std::cout << 
                     actionsLog[attackStep].getType()                 << " " << 
                     actionsLog[attackStep].getExecutant()->getName()
@@ -247,7 +268,22 @@ void BattleField::chooseAction (Controller ctrl, vector<string> category)
     checkCursorMoving(ctrl, category.size() - 1);
 
     if (ctrl.currentActionIs("Confirm")) {
-        writeAction(currentCategory, heros.getHero(currentHero), enemies.getEnemy(cursor));
+        if (currentCategory == "Attack") {
+            writeAction(currentCategory, heros.getHero(currentHero),
+                        enemies.getEnemy(cursor));
+        }
+        if (currentCategory == "Magic") {
+            // currentStep     = "ChoosingMagicTarget";
+
+            writeAction(currentCategory, heros.getHero(currentHero),
+                        heros.getHero(currentHero),
+                        &(heros.getHero(currentHero)->getSpells()[cursor])
+            );
+        }
+        if (currentCategory == "Run") {
+            writeAction(currentCategory, heros.getHero(currentHero));
+        }
+
         currentCategory = "";
         currentStep     = "ChoosingCategory";
         cursor          = 0;
@@ -261,20 +297,33 @@ void BattleField::chooseAction (Controller ctrl, vector<string> category)
     }
 }
 
+void BattleField::writeAction (string type, Unit* executant)
+{
+    if (currentCategory == "Run") {
+        actionsLog.push_back(Action(type, executant));
+    }
+}
+
 void BattleField::writeAction (string type, Unit* executant, Unit* target)
 {
     if (currentCategory == "Attack") {
         actionsLog.push_back(Action(type, executant, target));
     }
-    // if (currentCategory == "Magic") {
-    //     actionsLog.push_back(Action(type, executant, target));
-    // }
-    // if (currentCategory == "Inventory") {
-    //     actionsLog.push_back(Action(type, executant, target));
-    // }
-    if (currentCategory == "Run") {
-        actionsLog.push_back(Action(type, executant));
+}
+
+// void BattleField::writeAction (string type, Unit* executant, Unit* target, Item* usedItem)
+// {
+//     if (currentCategory == "Inventory") {
+//         actionsLog.push_back(Action(type, executant, target, usedItem));
+//     }
+// }
+
+void BattleField::writeAction (string type, Unit* executant, Unit* target, Spell* usedSpell)
+{
+    if (currentCategory == "Magic") {
+        actionsLog.push_back(Action(type, executant, target, usedSpell));
     }
+    
 }
 
 BattleField::~BattleField ()

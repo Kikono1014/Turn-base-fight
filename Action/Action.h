@@ -17,11 +17,15 @@ private:
     Spell*  usedSpell  {};
 
 public:
-    Action (string type, Unit* executant = {}, Unit* target = {});
+    Action (string type, Unit* executant);
+    Action (string type, Unit* executant, Unit* target);
+    // Action (string type, Unit* executant, Unit* target, Item*  usedItem);
+    Action (string type, Unit* executant, Unit* target, Spell* usedSpell);
 
     string getType      ();
     Unit*  getExecutant ();
     Unit*  getTarget    ();
+    Spell* getUsedSpell ();
 
     void setType      (string type     );
     void setExecutant (Unit*  executant);

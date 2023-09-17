@@ -17,7 +17,7 @@ private:
     string useType {};
     int    turns   {};
     int    value   {};
-    void (*useSpell) (Unit* executant, Unit* target) {};
+    void (*useSpell) (Unit* executant, Unit* target, Spell* spell) {};
 
     
     json readFromJson ();
@@ -27,7 +27,7 @@ public:
     Spell ();
     Spell (string name);
 
-    void use ();
+    void use (Unit* executant, Unit* target, Spell* spell);
 
     string getName  ();
     string getType  ();
@@ -36,5 +36,8 @@ public:
     ~Spell ();
 
 };
+
+
+void useChangeStatOnceType (Unit* executant, Unit* target, Spell* spell);
 
 #endif
