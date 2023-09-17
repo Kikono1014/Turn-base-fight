@@ -14,8 +14,8 @@
 #include "../Timer/Timer.h"
 #include "../Action/Action.h"
 #include "../Controller/Controller.h"
-#include "../Spell/Spell.h"
 #include "../Unit/Unit.h"
+#include "../Spell/Spell.h"
 #include "../Squad/Squad.h"
 #include "../Swarm/Swarm.h"
 

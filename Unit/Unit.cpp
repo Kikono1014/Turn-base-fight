@@ -44,8 +44,6 @@ int Unit::getINT   () { return INT   ; }
 int Unit::getRES   () { return RES   ; }
 int Unit::getDEX   () { return DEX   ; }
 
-vector<string> Unit::getSpells () { return spells; }
-
 
 void Unit::setName  (string name) { this->name = name; }
 void Unit::setType  (string type) { this->type = type; }
@@ -61,10 +59,6 @@ void Unit::setDEF   (int DEF  ) { this->DEF   = DEF  ; }
 void Unit::setINT   (int INT  ) { this->INT   = INT  ; }
 void Unit::setRES   (int RES  ) { this->RES   = RES  ; }
 void Unit::setDEX   (int DEX  ) { this->DEX   = DEX  ; }
-
-
-void Unit::setSpells (vector<string> spells) { this->spells = spells;}
-
 
 void die ()
 {

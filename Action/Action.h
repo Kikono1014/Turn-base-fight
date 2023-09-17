@@ -2,6 +2,7 @@
 #define ACTION_H
 
 #include <iostream>
+#include "../Spell/Spell.h"
 #include "../Unit/Unit.h"
 
 using std::string;
@@ -13,7 +14,7 @@ private:
     Unit*  executant {};
     Unit*  target    {};
     // Item*  usedItem  {};
-    // Spell*  usedSpell  {};
+    Spell*  usedSpell  {};
 
 public:
     Action (string type, Unit* executant = {}, Unit* target = {});

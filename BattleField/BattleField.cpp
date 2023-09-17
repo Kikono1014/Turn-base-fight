@@ -91,15 +91,14 @@ vector<string> BattleField::makeNamesList (vector<Enemy> list)
     return names;
 }
 
-// vector<string> BattleField::makeNamesList (vector<Spell> list)
-// {
-//     vector<string> names {};
-//     for (Spell i : list) {
-//         names.push_back(i.getName());
-//     }
-//     return names;
-// }
-// TODO to spells
+vector<string> BattleField::makeNamesList (vector<Spell> list)
+{
+    vector<string> names {};
+    for (Spell i : list) {
+        names.push_back(i.getName());
+    }
+    return names;
+}
 
 // vector<string> BattleField::makeNamesList (vector<Item> list); // TODO to items in inventory
 
@@ -131,8 +130,7 @@ void BattleField::processAction (Controller ctrl)
                 chooseAction(ctrl, makeNamesList(enemies.getEnemies()));
             }
             if (currentCategory == "Magic") {
-                // chooseAction(ctrl, makeNamesList(heros.getHero(currentHero)->getSpells()));
-                chooseAction(ctrl, heros.getHero(currentHero)->getSpells());
+                chooseAction(ctrl, makeNamesList(heros.getHero(currentHero)->getSpells()));
             }
             if (currentCategory == "Inventory") {
                 // chooseAction(ctrl, makeNamesList(heros.getInventory()));
@@ -173,8 +171,7 @@ void BattleField::showMenu () {
             showDirectory(makeNamesList(enemies.getEnemies()), "Enemies");
         }
         if (currentCategory == "Magic") {
-            // showDirectory(makeNamesList(heros.getHero(currentHero)->getSpells()), "Spells");
-            showDirectory(heros.getHero(currentHero)->getSpells(), "Spells");
+            showDirectory(makeNamesList(heros.getHero(currentHero)->getSpells()), "Spells");
         }
         if (currentCategory == "Inventory") {
             // showDirectory(makeNamesList(makeNamesList(heros.getInventory()), "Inventory");

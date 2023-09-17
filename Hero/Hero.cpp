@@ -19,6 +19,12 @@ Hero::Hero (
 
 }
 
+
+
+vector<Spell> Hero::getSpells () { return spells; }
+
+void Hero::setSpells (vector<Spell> spells) { this->spells = spells; }
+
 Hero::~Hero ()
 {
 
