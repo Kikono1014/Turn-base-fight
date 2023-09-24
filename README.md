@@ -17,3 +17,7 @@ Controls:
 1. Arrow up   - move up
 1. Arrow down - move down
 
+
+
+https://github.com/Kikono1014/Turn-base-fight/assets/69923041/d0f38a58-2053-4ea1-8e96-e8fea1ef9e21
+
