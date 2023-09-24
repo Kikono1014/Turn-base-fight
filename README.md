@@ -11,9 +11,9 @@ Not completed:
 But it works.
 
 Controls:
-1.Esc        - exit
-1.Backspace  - cancel
-1.Enter      - confirm
-1.Arrow up   - move up
-1.Arrow down - move down
+1. Esc        - exit
+1. Backspace  - cancel
+1. Enter      - confirm
+1. Arrow up   - move up
+1. Arrow down - move down
 
