@@ -17,17 +17,17 @@ private:
     string useType {};
     int    turns   {};
     int    value   {};
-    void (*useSpell) (Unit* executant, Unit* target, Spell* spell) {};
-
     
     json readFromJson ();
     void tryParseJson ();
     void createSpellByNameFromList (string name);
+
+    void useChangeStatOnceType (Unit* executant, Unit* target);
 public:
     Spell ();
     Spell (string name);
 
-    void use (Unit* executant, Unit* target, Spell* spell);
+    void use (Unit* executant, Unit* target);
 
     string getName  ();
     string getType  ();
@@ -36,8 +36,5 @@ public:
     ~Spell ();
 
 };
-
-
-void useChangeStatOnceType (Unit* executant, Unit* target, Spell* spell);
 
 #endif

@@ -24,6 +24,7 @@ public:
         int ATK, int DEF, int INT, int RES, int DEX 
     );
 
+    Spell* getSpell (int id);
     vector<Spell> getSpells ();
 
     void setSpells (vector<Spell> spells);

@@ -48,17 +48,16 @@ void Spell::createSpellByNameFromList (string name)
             useType = spell["useType"];
             turns   = spell["turns"];
             value   = spell["value"];
-            if (type == "changeStatOnce") {
-                useSpell = (&useChangeStatOnceType);
-            }
         }
     }
     std::cout << std::endl;
 }
 
-void Spell::use (Unit* executant, Unit* target, Spell* spell)
+void Spell::use (Unit* executant, Unit* target)
 {
-    useSpell(executant, target, spell);
+    if (useType == "changeStatOnce") {
+        useChangeStatOnceType(executant, target);
+    }
 }
 
 Spell::~Spell ()
@@ -67,12 +66,12 @@ Spell::~Spell ()
 }
 
 
-void useChangeStatOnceType (Unit* executant, Unit* target, Spell* spell)
+void Spell::useChangeStatOnceType (Unit* executant, Unit* target)
 {
-    if (spell->getType() == "HP") {
-        target->setHP(target->getHP() + spell->getValue());
+    if (type == "HP") {
+        target->setHP(target->getHP() + value);
     }
-    if (spell->getType() == "MP") {
-        target->setMP(target->getMP() + spell->getValue());
+    if (type == "MP") {
+        target->setMP(target->getMP() + value);
     }
 }

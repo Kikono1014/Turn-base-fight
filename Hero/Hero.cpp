@@ -21,6 +21,8 @@ Hero::Hero (
 
 
 
+Spell* Hero::getSpell (int id) { return &spells[id]; }
+
 vector<Spell> Hero::getSpells () { return spells; }
 
 void Hero::setSpells (vector<Spell> spells) { this->spells = spells; }

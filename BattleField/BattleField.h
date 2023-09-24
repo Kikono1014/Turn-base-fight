@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <random>
 
 #if defined _WIN32
     #include "windows.h"
@@ -33,13 +34,20 @@ private:
     Squad heros   {};
     Swarm enemies {};
 
-    string currentStep     { "ChoosingCategory" };
-    string currentCategory { "" };
-    int    currentHero     { 0 };
-    int    attackStep      { 0 };
-    int    cursor          { 0 };
-    bool   isRun           { false };
+    string currentStep      { "ChoosingCategory" };
+    string currentCategory  { "" };
+    int    currentHero      { 0 };
+    int    pickedInPrevious { 0 };
+    int    attackStep       { 0 };
+    int    cursor           { 0 };
+    bool   isRun            { false };
 
+
+    // Generate a random number in [min, max] diapason 
+    int  random      (int min, int max);
+
+    // Check a chance in percents
+    bool tryYourLuck (int chance);
 
     void delay (double time);
     void clear ();
@@ -52,6 +60,9 @@ private:
     vector<string> makeNamesList (vector<Enemy> list);
     vector<string> makeNamesList (vector<Spell> list);
     // vector<string> makeNamesList (vector<Item> list); // TODO to items in inventory
+    vector<string> compareNamesLists (
+        vector<string> list1, vector<string> list2
+    );
 
     void processAction (Controller ctrl);
 
@@ -63,9 +74,12 @@ private:
     void showEnemies     ();
     void showAttack      ();
 
-    void chooseCategory (Controller ctrl);
+    void makeAttack  ();
+    void printAttack ();
 
+    void chooseCategory (Controller ctrl);
     void chooseAction   (Controller ctrl, vector<string> category);
+    void chooseTarget   (Controller ctrl, vector<string> category);
     
     void writeAction (string type, Unit* executant);
     void writeAction (string type, Unit* executant, Unit* target);
