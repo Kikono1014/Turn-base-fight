@@ -188,17 +188,16 @@ void BattleField::processAction (Controller ctrl)
 }
 
 void BattleField::show (Controller ctrl) {
-    std::cout << heros.getHero(currentHero)->getName()     << std::endl;
-    std::cout << currentStep                               << std::endl;
-    std::cout << currentCategory                           << std::endl;
-    std::cout << cursor                                    << std::endl;
-    std::cout << "----------------------------------------------" << std::endl;
+    // std::cout << heros.getHero(currentHero)->getName()     << std::endl;
+    // std::cout << currentStep                               << std::endl;
+    // std::cout << currentCategory                           << std::endl;
+    // std::cout << cursor                                    << std::endl;
+    // std::cout << "----------------------------------------------" << std::endl;
     
     std::cout << std::endl;
     showBattleField();
     std::cout << std::endl;
     showMenu();
-    std::cout << std::endl;
     showAttack();
     std::cout << std::endl;
     showHeros();
