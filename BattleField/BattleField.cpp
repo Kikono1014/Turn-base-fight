@@ -22,7 +22,7 @@ void BattleField::runBattle (Controller ctrl)
 }
 
 
-int random (int min, int max) {
+int BattleField::random (int min, int max) {
     std::random_device rd;
     std::mt19937 mersenne(rd());
     int random = mersenne() % ((max + 1) + abs(min)) + min;
@@ -32,8 +32,8 @@ int random (int min, int max) {
 
 /// @brief check if it's within the percentage range
 /// @param chance - in %
-/// @return 
-bool tryYourLuck (int chance)
+/// @return 1 - luck, 0 - not
+bool BattleField::tryYourLuck (int chance)
 {
     return (random(0, 100) <= chance);
 }
@@ -179,6 +179,7 @@ void BattleField::processAction (Controller ctrl)
         }
 
         if (currentHero == heros.getHeros().size()) {
+            createEnemiesAttack();
             currentStep = "Attacking";
             timers["AttackTimer"] = Timer(1000);
             currentHero = 0;
@@ -198,11 +199,11 @@ void BattleField::show (Controller ctrl) {
     std::cout << std::endl;
     showMenu();
     std::cout << std::endl;
-    // showHeros();
-    // std::cout << std::endl;
-    // showEnemies();
-    std::cout << std::endl;
     showAttack();
+    std::cout << std::endl;
+    showHeros();
+    std::cout << std::endl;
+    showEnemies();
     std::cout << std::endl;
 }
 
@@ -308,8 +309,8 @@ void BattleField::makeAttack ()
     if (currentAction.getType() == "Run") {
         int runChance { 
                 20 + 
-                currentAction.getExecutant()->getDEX() *
-                0.2
+                (int)(currentAction.getExecutant()->getDEX() *
+                0.2)
             }; // 20%(minimal) + 20% of heros dexterity 
         if (tryYourLuck(30)) {
             isRun = 0;
@@ -343,6 +344,20 @@ void BattleField::printAttack ()
     }
 }
 
+
+void BattleField::createEnemiesAttack ()
+{
+    for (
+            int enemyId = 0; 
+            enemyId < enemies.getEnemies().size(); 
+            ++enemyId
+        ) {
+        actionsLog.push_back(Action("Attack",
+                enemies.getEnemy(enemyId),
+                heros.getHero(random(0, heros.getHeros().size() - 1))
+            ));
+    }
+}
 
 void BattleField::chooseCategory (Controller ctrl)
 {

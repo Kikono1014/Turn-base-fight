@@ -77,6 +77,8 @@ private:
     void makeAttack  ();
     void printAttack ();
 
+    void createEnemiesAttack ();
+
     void chooseCategory (Controller ctrl);
     void chooseAction   (Controller ctrl, vector<string> category);
     void chooseTarget   (Controller ctrl, vector<string> category);
